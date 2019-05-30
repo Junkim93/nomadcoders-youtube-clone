@@ -1,0 +1,10 @@
+extends layouts/main.pug
+
+block content
+    .video_player
+        video(src=`/${video.fileUrl}`)
+    .video_info
+        h5.video_title=video.title
+        span.video_views=video.views
+        p.video_description=video.description
+        
