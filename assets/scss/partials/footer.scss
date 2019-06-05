@@ -1,0 +1,14 @@
+.footer {
+  margin: 50px 0;
+  padding-top: 50px;
+  border-top: 3px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .footer__icon {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 35px;
+    margin-bottom: 20px;
+  }
+}
