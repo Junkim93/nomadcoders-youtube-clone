@@ -7,11 +7,18 @@ import "./models/User";
 
 import "./passport";
 
+const https = require("https");
+const fs = require("fs");
+
 dotenv.config();
 
+const options = {
+  key: fs.readFileSync("./server.key"),
+  cert: fs.readFileSync("./server.crt")
+};
 const PORT = process.env.PORT || 4000;
 
 const handleListening = () =>
-  console.log(`✅ Listening on: http://localhost:${PORT}`);
+  console.log(`✅ Listening on: https://localhost:${PORT}`);
 
-app.listen(PORT, handleListening);
+https.createServer(options, app).listen(PORT, handleListening);

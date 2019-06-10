@@ -88,3 +88,9 @@ package-lock.json
 
 # static
 static
+
+# ssl
+server.crt
+server.key
+
+
