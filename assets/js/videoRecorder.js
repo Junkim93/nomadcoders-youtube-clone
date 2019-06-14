@@ -19,7 +19,6 @@ const stopRecording = () => {
   recordBtn.removeEventListener("click", startRecording);
   recordBtn.addEventListener("click", getVideo);
   recordBtn.innerHTML = "Stop recording";
-  streamObject.stop();
 };
 
 const startRecording = () => {
