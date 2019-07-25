@@ -4,7 +4,6 @@ import {
   getUpload,
   postUpload,
   videoDetail,
-  editVideo,
   deleteVideo,
   getEditVideo,
   postEditVideo

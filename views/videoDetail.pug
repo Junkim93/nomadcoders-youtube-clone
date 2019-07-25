@@ -18,17 +18,34 @@ block content
                 span.video__views #{video.views} views
             .video__author
                 |Uploaded by
-                a(href=routes.userDetail(video.creator.id))=video.creator.name
+                a(href=routes.userDetail(video.creator.id)).video__author-name=video.creator.name
 
         .video__comments
             if video.comments.length === 1
-                span.video__comment-number 1 comment
+                span.video__comment-number
                     span#jsCommentNumber 1
                     |  comment
+            else if video.comments.length === 0
+                span.video__comment-number 
+                    span#jsCommentNumber 0
+                    |  comment
             else
-                span.video__comment-number #{video.comments.length} comments
+                span.video__comment-number 
+                    span#jsCommentNumber=video.comments.length
+                    |  comments
             form.add__comment#jsAddComment
                 input(type="text" placeholder="Add a Comment")
-            u1.video__comments-list
-                each comment in video.comments
-                    span=comment.text
+            ul.video__comments-list#jsCommentList
+                each comment in video.comments.reverse()
+                    li
+                        if loggedUser && (String(comment.creator) === loggedUser.id)
+                            span.jsComment=comment.text
+                                button(id=String(comment._id)) ❌
+                        else
+                            span=comment.text
+//- 댓글의 작성자라면
+//- 로그인 상태이고, 내가 그 댓글의 작성자라면, X를 보여주고
+//- X를 클릭하면 댓글을 지우고 comments를 -1 해주는 것
+
+//- populate
+//- 작성자인지 확인, 로그인했는지도 확인

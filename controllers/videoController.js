@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   try {
@@ -96,7 +97,7 @@ export const deleteVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    if (video.creator !== req.user.id) {
+    if (String(video.creator) !== req.user.id) {
       throw Error();
     } else {
       await Video.findOneAndRemove({ _id: id });
@@ -108,7 +109,6 @@ export const deleteVideo = async (req, res) => {
 };
 
 // Register Video View
-
 export const postRegisterView = async (req, res) => {
   const {
     params: { id }
@@ -126,7 +126,6 @@ export const postRegisterView = async (req, res) => {
 };
 
 // Add Comment
-
 export const postAddComment = async (req, res) => {
   const {
     params: { id },
@@ -142,9 +141,28 @@ export const postAddComment = async (req, res) => {
     video.comments.push(newComment.id);
     video.save();
   } catch (error) {
-    console.log(error);
     res.status(400);
   } finally {
     res.end();
   }
 };
+
+// Delete Comment
+export const postDeleteComment = async (req, res) => {
+  const {
+    params: { id },
+    user
+  } = req;
+  try {
+    const comment = await Comment.findById(id);
+    if (user.id === String(comment.creator)) {
+      await Comment.findByIdAndRemove({ _id: id });
+    }
+  } catch (err) {
+    console.log(err);
+  } finally {
+    res.end();
+  }
+};
+
+// req를 어디서 받는지
