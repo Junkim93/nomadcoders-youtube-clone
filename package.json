@@ -1,6 +1,9 @@
 {
   "name": "wetube",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
   "description": "Cloning Youtube with Vanilla and NodeJS",
   "main": "index.js",
   "author": "Jun Kim",
