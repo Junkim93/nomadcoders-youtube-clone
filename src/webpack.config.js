@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 const path = require("path");
 const autoprefixer = require("autoprefixer");
 const ExtractCSS = require("extract-text-webpack-plugin");
