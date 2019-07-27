@@ -1,3 +1,5 @@
+import getBlobDuration from "get-blob-duration";
+
 const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
@@ -10,7 +12,7 @@ const volumeRange = document.getElementById("jsVolume");
 const registerView = () => {
   const videoId = window.location.href.split("/videos/")[1];
   fetch(`/api/${videoId}/view`, {
-    mathod: "POST"
+    method: "POST"
   });
 };
 
@@ -48,6 +50,7 @@ function goFullScreen() {
   fullScreenBtn.removeEventListener("click", goFullScreen);
   fullScreenBtn.addEventListener("click", exitFullScreen);
 }
+
 const formatDate = seconds => {
   const secondsNumber = parseInt(seconds, 10);
   let hours = Math.floor(secondsNumber / 3600);
@@ -70,11 +73,14 @@ function getCurrentTime() {
   currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
-function setTotalTime() {
-  const totalTimeString = formatDate(videoPlayer.duration);
+async function setTotalTime() {
+  const blob = await fetch(videoPlayer.src).then(res => res.blob());
+  const duration = await getBlobDuration(blob);
+  const totalTimeString = formatDate(duration);
   totalTime.innerHTML = totalTimeString;
   setInterval(getCurrentTime, 1000);
 }
+// 영상의 주소를 받아서 서버에 요청
 
 function handleEnded() {
   registerView();
