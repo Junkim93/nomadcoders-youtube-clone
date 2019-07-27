@@ -15,7 +15,9 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `https://localhost:4000${routes.githubCallback}`
+      callbackURL: process.env.PRODUCTION
+        ? `https://thawing-retreat-19805.herokuapp.com/${routes.githubCallback}`
+        : `https://localhost:4000${routes.githubCallback}`
     },
     githubLoginCallback
   )
@@ -26,7 +28,9 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: `https://localhost:4000${routes.facebookCallback}`,
+      callbackURL: process.env.PRODUCTION
+        ? `https://thawing-retreat-19805.herokuapp.com/${routes.githubCallback}`
+        : `https://localhost:4000${routes.facebookCallback}`,
       profileFields: ["id", "displayName", "photos", "email"],
       scope: ["public_profile", "email"]
     },
