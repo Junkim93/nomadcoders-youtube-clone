@@ -8,6 +8,7 @@
   "main": "index.js",
   "author": "Jun Kim",
   "dependencies": {
+    "@babel/cli": "^7.5.5",
     "@babel/core": "^7.4.4",
     "@babel/node": "^7.2.2",
     "@babel/polyfill": "^7.4.4",
@@ -62,7 +63,6 @@
     "prestart": "npm run build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "nodemon": "^1.18.11"
   }
